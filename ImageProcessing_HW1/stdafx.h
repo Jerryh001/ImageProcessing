@@ -14,6 +14,9 @@ using namespace System::Data;
 using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace System::Windows::Forms::DataVisualization::Charting;
+#include "DisplayComponent.h"
+#include "Picture.h"
+#include "ChartPic.h"
 #include "Operation.h"
 #include "ColorExtraction.h"
 #include "ColorTransformation.h"
@@ -24,3 +27,4 @@ using namespace System::Windows::Forms::DataVisualization::Charting;
 #include "OverlapEdgeDetection.h"
 #include "ImageRotation.h"
 #include "ImageScaling.h"
+#include "OperationExecuter.h"

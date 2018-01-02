@@ -11,27 +11,27 @@ Object^ ColorExtraction::Clone()
 }
 Void ColorExtraction::Run()
 {
-	result = gcnew List<Bitmap^>(3);
+	List<Bitmap^>^ answers = gcnew List<Bitmap^>(3);
 	for (int i = 0; i < 3;i++)
 	{
-		result->Add(gcnew Bitmap(image));
+		answers->Add(gcnew Bitmap(image));
 	}
 	for (int i = 0; i < image->Width; i++)
 	{
 		for (int j = 0; j < image->Height; j++)
 		{
 			Color% pixel = image->GetPixel(i, j);
-			result[0]->SetPixel(i, j, Color::FromArgb(pixel.R, pixel.R, pixel.R));
-			result[1]->SetPixel(i, j, Color::FromArgb(pixel.G, pixel.G, pixel.G));
-			result[2]->SetPixel(i, j, Color::FromArgb(pixel.B, pixel.B, pixel.B));
+			answers[0]->SetPixel(i, j, Color::FromArgb(pixel.R, pixel.R, pixel.R));
+			answers[1]->SetPixel(i, j, Color::FromArgb(pixel.G, pixel.G, pixel.G));
+			answers[2]->SetPixel(i, j, Color::FromArgb(pixel.B, pixel.B, pixel.B));
 		}
+	}
+	for each(Bitmap^ b in answers)
+	{
+		results->Add(gcnew Picture(b));
 	}
 }
 Bitmap^ ColorExtraction::GetResult()
 {
-	return result[(int)result_index];
-}
-List<Bitmap^>^ ColorExtraction::GetResults()
-{
-	return result;
+	return results[(int)result_index]->GetImage();
 }

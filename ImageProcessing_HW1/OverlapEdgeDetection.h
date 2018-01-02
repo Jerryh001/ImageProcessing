@@ -3,7 +3,6 @@
 ref class OverlapEdgeDetection :
 public Operation
 {
-	Bitmap^ result;
 public:
 	[CategoryAttribute("參數"), DisplayName("門檻"), Description("邊緣偵測門檻值")]
 	property unsigned short int threshold;
@@ -12,7 +11,5 @@ public:
 	OverlapEdgeDetection();
 	Object^ Clone() override;
 	Void Run() override;
-	Bitmap^ GetResult() override;
-	List<Bitmap^>^ GetResults() override;
 };
 

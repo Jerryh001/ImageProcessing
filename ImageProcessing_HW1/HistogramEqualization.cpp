@@ -5,7 +5,7 @@
 HistogramEqualization::HistogramEqualization()
 {
 }
-Dictionary<int, int>^ HistogramEqualization::GetBrightnessSum(Bitmap^% image)
+Dictionary<int, int>^ HistogramEqualization::GetBrightnessSum(Bitmap^ image)
 {
 	Dictionary<int, int>^ sum = gcnew Dictionary<int, int>();
 	for (int i = 0; i < image->Width; i++)
@@ -25,12 +25,6 @@ Dictionary<int, int>^ HistogramEqualization::GetBrightnessSum(Bitmap^% image)
 	}
 	return sum;
 }
-void HistogramEqualization::BindBitmapChart(Bitmap^% image, Chart^% chart)
-{
-	Dictionary<int, int>^ d = GetBrightnessSum(image);
-	
-	chart->Series["Series1"]->Points->DataBindXY(d->Keys, d->Values);
-}
 Object^ HistogramEqualization::Clone()
 {
 	return gcnew HistogramEqualization();
@@ -40,7 +34,7 @@ Void HistogramEqualization::Run()
 	ColorTransformation t;
 	t.SetImage(image);
 	Bitmap^ input = t.GetResult();
-	result = gcnew Bitmap(input);
+	Bitmap^ answer = gcnew Bitmap(input);
 	Dictionary<int, int>^ p = GetBrightnessSum(input);
 	Dictionary<int, int>^ sum = gcnew Dictionary<int, int>();
 	int sumpoint = 0;
@@ -63,15 +57,9 @@ Void HistogramEqualization::Run()
 			
 			int red = input->GetPixel(i, j).R;
 			int bright = Math::Round(((float)sum[red] - sum[brightmin]) / (sumpoint - sum[brightmin]) * 255);
-			result->SetPixel(i, j, Color::FromArgb(bright, bright, bright));
+			answer->SetPixel(i, j, Color::FromArgb(bright, bright, bright));
 		}
 	}
-}
-Bitmap^ HistogramEqualization::GetResult()
-{
-	return result;
-}
-List<Bitmap^>^ HistogramEqualization::GetResults()
-{
-	return gcnew List<Bitmap^>(gcnew array<Bitmap^>{result});
+	results->Add(gcnew Picture(answer));
+	results->Add(gcnew ChartPic(answer));
 }

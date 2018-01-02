@@ -15,7 +15,7 @@ Void SmoothFilter::Run()
 	ColorTransformation t;
 	t.SetImage(image);
 	Bitmap^ input = t.GetResult();
-	result = gcnew Bitmap(image);
+	Bitmap^ answer = gcnew Bitmap(image);
 	for (int i = 0; i < input->Width; i++)
 	{
 		for (int j = 0; j < input->Height; j++)
@@ -53,15 +53,8 @@ Void SmoothFilter::Run()
 					ans = (pixels[pixels->Count / 2] + pixels[pixels->Count / 2 - 1]) / 2;
 				}
 			}
-			result->SetPixel(i, j, Color::FromArgb(ans, ans, ans));
+			answer->SetPixel(i, j, Color::FromArgb(ans, ans, ans));
 		}
 	}
-}
-Bitmap^ SmoothFilter::GetResult()
-{
-	return result;
-}
-List<Bitmap^>^ SmoothFilter::GetResults()
-{
-	return gcnew List<Bitmap^>(gcnew array<Bitmap^>{result});
+	results->Add(gcnew Picture(answer));
 }

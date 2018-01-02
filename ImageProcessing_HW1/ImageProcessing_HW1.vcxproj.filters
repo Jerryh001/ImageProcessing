@@ -54,6 +54,18 @@
     <ClInclude Include="ImageScaling.h">
       <Filter>標頭檔</Filter>
     </ClInclude>
+    <ClInclude Include="Picture.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="ChartPic.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationExecuter.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayComponent.h">
+      <Filter>標頭檔</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -101,6 +113,18 @@
       <Filter>原始程式檔</Filter>
     </ClCompile>
     <ClCompile Include="ImageScaling.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="Picture.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartPic.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationExecuter.cpp">
+      <Filter>原始程式檔</Filter>
+    </ClCompile>
+    <ClCompile Include="DisplayComponent.cpp">
       <Filter>原始程式檔</Filter>
     </ClCompile>
   </ItemGroup>

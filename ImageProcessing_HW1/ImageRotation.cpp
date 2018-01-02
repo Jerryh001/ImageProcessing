@@ -38,30 +38,23 @@ Void ImageRotation::Run()
 			maxp->Y = temp->Y;
 		}
 	}
-	result = gcnew Bitmap(Math::Ceiling(maxp->X - minp->X), Math::Ceiling(maxp->Y - minp->Y));
+	Bitmap^ answer = gcnew Bitmap(Math::Ceiling(maxp->X - minp->X), Math::Ceiling(maxp->Y - minp->Y));
 	Rectangle^ r = gcnew Rectangle(0, 0, image->Width, image->Height);
-	for (int i = 0; i < result->Width; i++)
+	for (int i = 0; i < answer->Width; i++)
 	{
-		for (int j = 0; j < result->Height; j++)
+		for (int j = 0; j < answer->Height; j++)
 		{
 			PointF^ temp = Rotate(gcnew PointF(i + minp->X, j + minp->Y), -degree);
 			Point^ origin = gcnew Point(Math::Round(temp->X), Math::Round(temp->Y));
 			if (r->Contains(*origin))
 			{
-				result->SetPixel(i, j, image->GetPixel(origin->X, origin->Y));
+				answer->SetPixel(i, j, image->GetPixel(origin->X, origin->Y));
 			}
 			else
 			{
-				result->SetPixel(i, j, Color::Transparent);
+				answer->SetPixel(i, j, Color::Transparent);
 			}
 		}
 	}
-}
-Bitmap^ ImageRotation::GetResult()
-{
-	return result;
-}
-List<Bitmap^>^ ImageRotation::GetResults()
-{
-	return gcnew List<Bitmap^>(gcnew array<Bitmap^>{result});
+	results->Add(gcnew Picture(answer));
 }

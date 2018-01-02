@@ -30,21 +30,14 @@ Void ImageScaling::Run()
 		minp->Y = maxp->Y;
 		maxp->Y = temp;
 	}
-	result = gcnew Bitmap(Math::Ceiling(maxp->X - minp->X), Math::Ceiling(maxp->Y - minp->Y));
-	for (int i = 0; i < result->Width; i++)
+	Bitmap^ answer = gcnew Bitmap(Math::Ceiling(maxp->X - minp->X), Math::Ceiling(maxp->Y - minp->Y));
+	for (int i = 0; i < answer->Width; i++)
 	{
-		for (int j = 0; j < result->Height; j++)
+		for (int j = 0; j < answer->Height; j++)
 		{
 			//int t = Math::Floor((j + minp->Y) / scaley);
-			result->SetPixel(i, j, image->GetPixel(Math::Floor((i + minp->X) / scalex), Math::Floor((j + minp->Y) / scaley)));
+			answer->SetPixel(i, j, image->GetPixel(Math::Floor((i + minp->X) / scalex), Math::Floor((j + minp->Y) / scaley)));
 		}
 	}
-}
-Bitmap^ ImageScaling::GetResult()
-{
-	return result;
-}
-List<Bitmap^>^ ImageScaling::GetResults()
-{
-	return gcnew List<Bitmap^>(gcnew array<Bitmap^>{result});
+	results->Add(gcnew Picture(answer));
 }

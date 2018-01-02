@@ -13,7 +13,7 @@ Object^ OverlapEdgeDetection::Clone()
 }
 Void OverlapEdgeDetection::Run()
 {
-	result = gcnew Bitmap(image);
+	Bitmap^ answer = gcnew Bitmap(image);
 	SobelEdgeDetection sed;
 	sed.result_index = SobelEdgeDetection::ResultType::Both;
 	sed.SetImage(image);
@@ -27,16 +27,9 @@ Void OverlapEdgeDetection::Run()
 		{
 			if (b->GetPixel(i, j).R == 255)
 			{
-				result->SetPixel(i, j, color);
+				answer->SetPixel(i, j, color);
 			}
 		}
 	}
-}
-Bitmap^ OverlapEdgeDetection::GetResult()
-{
-	return result;
-}
-List<Bitmap^>^ OverlapEdgeDetection::GetResults()
-{
-	return gcnew List<Bitmap^>(gcnew array<Bitmap^>{result});
+	results->Add(gcnew Picture(answer));
 }
